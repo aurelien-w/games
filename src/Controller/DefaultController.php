@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Duel;
 use App\Entity\Player;
 use App\Form\DuelType;
+use App\Service\Ranking;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -26,12 +27,23 @@ class DefaultController extends Controller
         $formDuel->handleRequest($request);
 
         if ($formDuel->isSubmitted() && $formDuel->isValid()) {
+            $scoreA = Ranking::DRAW;
+            $scoreB = Ranking::DRAW;
+
+            if ($duel->getScoreA() > $duel->getScoreB()) {
+                $scoreA = Ranking::WIN;
+                $scoreB = Ranking::LOST;
+            } elseif ($duel->getScoreB() > $duel->getScoreA()) {
+                $scoreA = Ranking::LOST;
+                $scoreB = Ranking::WIN;
+            }
+
             // Ranking
             $ranking = $this->get('App\Service\Ranking')->setNewSettings(
                 $duel->getPlayerA()->getRank(),
                 $duel->getPlayerB()->getRank(),
-                $duel->getScoreA(),
-                $duel->getScoreB()
+                $scoreA,
+                $scoreB
             );
             $duel->getPlayerA()->setRank($ranking['ratingA']);
             $duel->setRankA($ranking['diffA']);
