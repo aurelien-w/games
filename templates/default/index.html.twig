@@ -17,7 +17,10 @@
                         <th scope="col">#</th>
                         <th scope="col">Players</th>
                         <th scope="col">Rank</th>
-                        <th scope="col">Nb. Matchs</th>
+                        <th scope="col">V</th>
+                        <th scope="col">N</th>
+                        <th scope="col">D</th>
+                        <th scope="col">Total</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -26,6 +29,9 @@
                         <th scope="row">{{ loop.index }}</th>
                         <td>{{ player.name }}</td>
                         <td>{{ player.rank }}</td>
+                        <td>{{ player.duelsWin|length }}</td>
+                        <td>{{ player.duelsEquality|length }}</td>
+                        <td>{{ player.duelsLose|length }}</td>
                         <td>{{ player.duels|length }}</td>
                     </tr>
                     {% endfor %}

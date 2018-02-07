@@ -163,6 +163,61 @@ class Player
     }
 
     /**
+     * @return array
+     */
+    public function getDuelsWin()
+    {
+        $duels = $this->getDuels();
+        $duelsWin = [];
+
+        foreach ($duels as $duel) {
+            if ($duel->getPlayerA()->getId() === $this->getId() && $duel->getScoreA() > $duel->getScoreB()) {
+                $duelsWin[] = $duel;
+            } elseif ($duel->getPlayerB()->getId() === $this->getId() && $duel->getScoreB() > $duel->getScoreA()) {
+                $duelsWin[] = $duel;
+            }
+        }
+
+        return $duelsWin;
+    }
+
+    /**
+     * @return array
+     */
+    public function getDuelsLose()
+    {
+        $duels = $this->getDuels();
+        $duelsLose = [];
+
+        foreach ($duels as $duel) {
+            if ($duel->getPlayerA()->getId() === $this->getId() && $duel->getScoreA() < $duel->getScoreB()) {
+                $duelsLose[] = $duel;
+            } elseif ($duel->getPlayerB()->getId() === $this->getId() && $duel->getScoreB() < $duel->getScoreA()) {
+                $duelsLose[] = $duel;
+            }
+        }
+
+        return $duelsLose;
+    }
+
+    /**
+     * @return array
+     */
+    public function getDuelsEquality()
+    {
+        $duels = $this->getDuels();
+        $duelsEquality = [];
+
+        foreach ($duels as $duel) {
+            if ($duel->getScoreA() === $duel->getScoreB()) {
+                $duelsEquality[] = $duel;
+            }
+        }
+
+        return $duelsEquality;
+    }
+
+    /**
      * @return mixed
      */
     public function getUpdatedAt()
