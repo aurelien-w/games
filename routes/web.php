@@ -15,3 +15,6 @@ Route::get('/', 'HomeController');
 
 Route::resource('/games', 'GameController')
     ->except('create', 'edit');
+
+Route::resource('/players', 'PlayerController')
+    ->only('index', 'show');
