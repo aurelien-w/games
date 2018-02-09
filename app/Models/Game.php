@@ -11,4 +11,12 @@ class Game extends Model
      * @var string
      */
     protected $table = 'duel';
+
+    /**
+     * Mass assignable fields
+     * @var array
+     */
+    protected $fillable = [
+        'player_a_id', 'player_b_id', 'score_a', 'score_b'
+    ];
 }
