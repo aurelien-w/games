@@ -5,7 +5,7 @@ window.axios = axios.create({
     baseURL: window.location.origin,
     headers: {
         'X-Requested-With': 'XMLHttpRequest',
-        'X-CSRF-TOKEN': document.head.querySelector('meta[name="csrf-token"]').content,
+        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
         'Content-Type': 'application/json',
         'Accept': 'application/json'
     }
