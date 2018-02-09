@@ -3,7 +3,7 @@ namespace PHPSTORM_META {
 
    /**
     * PhpStorm Meta file, to provide autocomplete information for PhpStorm
-    * Generated on 2018-02-09 21:28:21.
+    * Generated on 2018-02-09 21:49:56.
     *
     * @author Barry vd. Heuvel <barryvdh@gmail.com>
     * @see https://github.com/barryvdh/laravel-ide-helper
@@ -26,7 +26,7 @@ namespace PHPSTORM_META {
         'cookie' => \Illuminate\Cookie\CookieJar::class,
         'db.factory' => \Illuminate\Database\Connectors\ConnectionFactory::class,
         'db' => \Illuminate\Database\DatabaseManager::class,
-        'db.connection' => \Illuminate\Database\SQLiteConnection::class,
+        'db.connection' => \Illuminate\Database\MySqlConnection::class,
         'Illuminate\Contracts\Queue\EntityResolver' => \Illuminate\Database\Eloquent\QueueEntityResolver::class,
         'encrypter' => \Illuminate\Encryption\Encrypter::class,
         'files' => \Illuminate\Filesystem\Filesystem::class,
@@ -160,7 +160,7 @@ namespace PHPSTORM_META {
         'cookie' => \Illuminate\Cookie\CookieJar::class,
         'db.factory' => \Illuminate\Database\Connectors\ConnectionFactory::class,
         'db' => \Illuminate\Database\DatabaseManager::class,
-        'db.connection' => \Illuminate\Database\SQLiteConnection::class,
+        'db.connection' => \Illuminate\Database\MySqlConnection::class,
         'Illuminate\Contracts\Queue\EntityResolver' => \Illuminate\Database\Eloquent\QueueEntityResolver::class,
         'encrypter' => \Illuminate\Encryption\Encrypter::class,
         'files' => \Illuminate\Filesystem\Filesystem::class,
@@ -294,7 +294,7 @@ namespace PHPSTORM_META {
         'cookie' => \Illuminate\Cookie\CookieJar::class,
         'db.factory' => \Illuminate\Database\Connectors\ConnectionFactory::class,
         'db' => \Illuminate\Database\DatabaseManager::class,
-        'db.connection' => \Illuminate\Database\SQLiteConnection::class,
+        'db.connection' => \Illuminate\Database\MySqlConnection::class,
         'Illuminate\Contracts\Queue\EntityResolver' => \Illuminate\Database\Eloquent\QueueEntityResolver::class,
         'encrypter' => \Illuminate\Encryption\Encrypter::class,
         'files' => \Illuminate\Filesystem\Filesystem::class,
@@ -428,7 +428,7 @@ namespace PHPSTORM_META {
         'cookie' => \Illuminate\Cookie\CookieJar::class,
         'db.factory' => \Illuminate\Database\Connectors\ConnectionFactory::class,
         'db' => \Illuminate\Database\DatabaseManager::class,
-        'db.connection' => \Illuminate\Database\SQLiteConnection::class,
+        'db.connection' => \Illuminate\Database\MySqlConnection::class,
         'Illuminate\Contracts\Queue\EntityResolver' => \Illuminate\Database\Eloquent\QueueEntityResolver::class,
         'encrypter' => \Illuminate\Encryption\Encrypter::class,
         'files' => \Illuminate\Filesystem\Filesystem::class,
@@ -562,7 +562,7 @@ namespace PHPSTORM_META {
         'cookie' => \Illuminate\Cookie\CookieJar::class,
         'db.factory' => \Illuminate\Database\Connectors\ConnectionFactory::class,
         'db' => \Illuminate\Database\DatabaseManager::class,
-        'db.connection' => \Illuminate\Database\SQLiteConnection::class,
+        'db.connection' => \Illuminate\Database\MySqlConnection::class,
         'Illuminate\Contracts\Queue\EntityResolver' => \Illuminate\Database\Eloquent\QueueEntityResolver::class,
         'encrypter' => \Illuminate\Encryption\Encrypter::class,
         'files' => \Illuminate\Filesystem\Filesystem::class,
@@ -696,7 +696,7 @@ namespace PHPSTORM_META {
         'cookie' => \Illuminate\Cookie\CookieJar::class,
         'db.factory' => \Illuminate\Database\Connectors\ConnectionFactory::class,
         'db' => \Illuminate\Database\DatabaseManager::class,
-        'db.connection' => \Illuminate\Database\SQLiteConnection::class,
+        'db.connection' => \Illuminate\Database\MySqlConnection::class,
         'Illuminate\Contracts\Queue\EntityResolver' => \Illuminate\Database\Eloquent\QueueEntityResolver::class,
         'encrypter' => \Illuminate\Encryption\Encrypter::class,
         'files' => \Illuminate\Filesystem\Filesystem::class,
@@ -830,7 +830,7 @@ namespace PHPSTORM_META {
         'cookie' => \Illuminate\Cookie\CookieJar::class,
         'db.factory' => \Illuminate\Database\Connectors\ConnectionFactory::class,
         'db' => \Illuminate\Database\DatabaseManager::class,
-        'db.connection' => \Illuminate\Database\SQLiteConnection::class,
+        'db.connection' => \Illuminate\Database\MySqlConnection::class,
         'Illuminate\Contracts\Queue\EntityResolver' => \Illuminate\Database\Eloquent\QueueEntityResolver::class,
         'encrypter' => \Illuminate\Encryption\Encrypter::class,
         'files' => \Illuminate\Filesystem\Filesystem::class,
