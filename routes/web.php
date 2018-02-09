@@ -12,3 +12,6 @@
 */
 
 Route::get('/', 'HomeController');
+
+Route::resource('/games', 'GameController')
+    ->except('create', 'edit');
