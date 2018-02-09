@@ -137,9 +137,21 @@
                 games: []
             }
         },
+        methods: {
+            fetchPlayers () {
+                window.axios.get('players')
+                    .then(response => this.players = response.data)
+                    .catch(console.error)
+            },
+            fetchGames () {
+                window.axios.get('games')
+                    .then(response => this.games = response.data)
+                    .catch(console.error)
+            }
+        },
         created () {
-            this.players = window.data.players
-            this.games = window.data.games
+            this.fetchPlayers()
+            this.fetchGames()
         }
     }
 </script>
