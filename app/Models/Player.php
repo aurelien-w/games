@@ -7,4 +7,9 @@ use Illuminate\Support\Collection;
 
 class Player extends Model
 {
+    /**
+     * Database table name
+     * @var string
+     */
+    protected $table = 'player';
 }
