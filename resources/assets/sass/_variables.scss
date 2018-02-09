@@ -1,18 +1,63 @@
+/**
+ * Branding
+ */
+$gold: #CFB53B !default;
+$silver: #E6E8FA !default;
+$bronze: #8C7853 !default;
 
-// Body
-$body-bg: #f5f8fa;
+$gold-invert: findColorInvert($gold) !default;
+$silver-invert: findColorInvert($silver) !default;
+$bronze-invert: findColorInvert($bronze) !default;
 
-// Typography
-$font-family-sans-serif: "Raleway", sans-serif;
-$font-size-base: 0.9rem;
-$line-height-base: 1.6;
-$text-color: #636b6f;
+/**
+ * Utilities
+ */
 
-// Navbar
-$navbar-default-bg: #fff;
+$img-path: "../img/" !default;
 
-// Buttons
-$btn-default-color: $text-color;
+// Colors
+$addColors: (
+    "gold":($gold, $gold-invert),
+    "silver": ($silver, $silver-invert),
+    "bronze": ($bronze, $bronze-invert)
+);
+$colors: map-merge($colors, $addColors);
 
-// Panels
-$panel-default-heading-bg: #fff;
+/**
+ * Base
+ */
+
+// Generic
+//$family-primary: 'Larsseit', $family-sans-serif;
+$text: #000;
+$text-strong: $text;
+$body-background-color : #F5F7FA;
+
+/**
+ * Elements
+ */
+
+// Title
+$title-weight: $weight-normal;
+
+// Box
+$box-radius: .5rem;
+$box-shadow: 0 15px 35px rgba(50,50,93,.1), 0 5px 15px rgba(0,0,0,.07);
+$box-transition: transform .4s;
+
+/**
+ * Components
+ */
+
+
+/**
+ * Grid
+ */
+
+
+/**
+ * Layout
+ */
+
+// Footer
+$footer-background-color: transparent;

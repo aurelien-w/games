@@ -1,14 +1,26 @@
+@import "bulma";
 
-// Fonts
-@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
+/**
+ * Base
+ */
+@import "generic";
 
-// Variables
-@import "variables";
+/**
+ * Elements
+ */
+@import "box";
 
-// Bootstrap
-@import '~bootstrap/scss/bootstrap';
+/**
+ * Components
+ */
 
-.navbar-laravel {
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
-}
+
+/**
+ * Grid
+ */
+
+
+/**
+ * Layout
+ */
+
