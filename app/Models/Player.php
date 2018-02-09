@@ -49,6 +49,12 @@ class Player extends Model
      */
     public function getGamesAttribute()
     {
-        return new Collection($this->games_a, $this->games_b);
+        if (!$this->relationLoaded('games_a') || !$this->relationLoaded('games_b')) {
+            return new Collection();
+        }
+
+        return (
+            new Collection($this->games_a)
+        )->concat($this->games_b);
     }
 }
