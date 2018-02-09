@@ -12,6 +12,19 @@ class Player extends Model
      * @var string
      */
     protected $table = 'player';
+
+    /**
+     * Hidden properties
+     * @var array
+     */
+    protected $hidden = ['games_a', 'games_b'];
+
+    /**
+     * Serialized dynamic properties
+     * @var array
+     */
+    protected $appends = ['games'];
+
     /**
      * A Player hasMany "A" Games
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -28,5 +41,14 @@ class Player extends Model
     public function games_b()
     {
         return $this->hasMany(Game::class, 'player_a_id');
+    }
+
+    /**
+     * A Player hasMany Games
+     * @return Collection
+     */
+    public function getGamesAttribute()
+    {
+        return new Collection($this->games_a, $this->games_b);
     }
 }
