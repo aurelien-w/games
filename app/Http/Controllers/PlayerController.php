@@ -14,7 +14,7 @@ class PlayerController extends Controller
      */
     public function index()
     {
-        return Player::with('game_a', 'game_b')->get();
+        return Player::with('games_a', 'games_b')->get();
     }
 
     /**
@@ -25,6 +25,6 @@ class PlayerController extends Controller
      */
     public function show($player)
     {
-        return Player::with('game_a', 'game_b')->findOrFail($player);
+        return Player::with('games_a', 'games_b')->findOrFail($player);
     }
 }
