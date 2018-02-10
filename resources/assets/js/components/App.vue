@@ -7,12 +7,12 @@
                     <h1 class="title is-size-1-desktop">{{ name }}</h1>
                     <h2 class="subtitle is-size-3-desktop">{{ title }}</h2>
                     <p class="has-text-centered" v-show="$route.name !== 'games.create'">
-                        <router-link :to="{ name: 'games.create' }" class="button is-primary is-rounded is-inverted is-size-5-desktop">
+                        <button class="button is-primary is-rounded is-inverted is-size-5-desktop" @click="gameCreateModal = true">
                             <span class="icon">
                                 <i class="fas fa-futbol"></i>
                             </span>
                             <span class="has-text-grey-dark">Ajouter un match</span>
-                        </router-link>
+                        </button>
                     </p>
                 </div>
             </div>
@@ -51,15 +51,23 @@
                 <router-view></router-view>
             </keep-alive>
         </transition>
+        <!-- MODAL -->
+        <modal v-show="gameCreateModal" @close="gameCreateModal = false">
+            <games-create @close="gameCreateModal = false"></games-create>
+        </modal>
     </div>
 </template>
 
 <script>
+    import GamesCreate from '../views/games/Create'
+
     export default {
         name: 'App',
+        components: { GamesCreate },
         data () {
             return {
-                name: 'FIFA'
+                name: 'FIFA',
+                gameCreateModal: false
             }
         },
         computed: {
