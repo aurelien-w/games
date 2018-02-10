@@ -24,13 +24,11 @@
             <div class="box">
                 <div class="columns is-center-aligned">
                     <!-- TROPHY -->
-                    <div class="column is-2">
-                        <p>
-                                    <span class="icon is-large" :class="trophy(i)">
-                                        <i class="fas fa-trophy-alt fa-2x"></i>
-                                    </span>
-                            <span class="is-size-5">{{ i + 1 }}</span>
+                    <div class="column is-2 has-text-centered">
+                        <p class="icon is-large" v-if="i <= 2" :class="trophy(i)">
+                            <i class="fas fa-trophy-alt fa-2x"></i>
                         </p>
+                        <p class="is-size-3" v-else>{{ i + 1 }}</p>
                     </div>
                     <!-- NAME -->
                     <div class="column is-3">
@@ -60,26 +58,16 @@
 </template>
 
 <script>
-    import collect from 'collect.js'
+    import Vuex from 'vuex'
 
     export default {
         name: 'PlayersIndex',
-        data () {
-            return {
-                players: collect()
-            }
+        computed: {
+            ...Vuex.mapGetters(['players']),
         },
         methods: {
-            /**
-             * Fetches the players
-             */
-            fetchPlayers () {
-                window.axios.get('players')
-                    .then(
-                        response => this.players = collect(response.data)
-                    )
-                    .catch(console.error)
-            },
+            ...Vuex.mapActions(['fetchPlayers']),
+
             /**
              * Determines the trophy color
              * @param position
@@ -94,7 +82,9 @@
             }
         },
         created () {
+            this.toggleLoading()
             this.fetchPlayers()
+                .then(this.toggleLoading)
         }
     }
 </script>

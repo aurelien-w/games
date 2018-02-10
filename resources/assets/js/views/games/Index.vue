@@ -7,11 +7,8 @@
         <div class="column is-2">
             <span class="heading">Points A</span>
         </div>
-        <div class="column is-1">
-            <span class="heading">Score A</span>
-        </div>
-        <div class="column is-1 has-text-right">
-            <span class="heading">Score B</span>
+        <div class="column is-2 has-text-centered">
+            <span class="heading">Score</span>
         </div>
         <div class="column is-2 has-text-right">
             <span class="heading">Points B</span>
@@ -48,26 +45,21 @@
 </template>
 
 <script>
-    import collect from 'collect.js'
+    import Vuex from 'vuex'
 
     export default {
         name: 'GamesIndex',
-        data () {
-            return {
-                games: collect()
-            }
+        computed: {
+            ...Vuex.mapGetters(['games'])
         },
         methods: {
+            ...Vuex.mapActions(['fetchGames']),
+
             /**
-             * Fetches the games
+             *
+             * @param value
+             * @returns {string}
              */
-            fetchGames () {
-                window.axios.get('games')
-                    .then(
-                        response => this.games = collect(response.data)
-                    )
-                    .catch(console.error)
-            },
             sign (value) {
                 value = '' + value
                 let status = 'has-text-success'
@@ -76,11 +68,13 @@
                     status = 'has-text-danger'
                 }
 
-                return `<span class="${status}">${value}</span>`
+                return `<span class="${status} has-text-weight-bold">${value}</span>`
             }
         },
         created () {
+            this.toggleLoading()
             this.fetchGames()
+                .then(this.toggleLoading)
         }
     }
 </script>
