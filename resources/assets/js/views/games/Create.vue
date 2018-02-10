@@ -11,7 +11,7 @@
                                 <i class="fal fa-user"></i>
                             </span>
                             <div class="select is-fullwidth">
-                                <select id="player_a" v-model="player_a">
+                                <select id="player_a" v-model="form.player_a">
                                     <option value="" selected disabled>Choisir un joueur</option>
                                     <option :value="player.id" v-for="player in playersA.all()">{{ player.name }}</option>
                                 </select>
@@ -26,7 +26,7 @@
                             <span class="icon is-left">
                                 <i class="fas fa-futbol"></i>
                             </span>
-                            <input type="number" id="score_a" class="input" v-model="score_a">
+                            <input type="number" id="score_a" class="input" v-model="form.score_a">
                         </div>
                     </div>
                 </div>
@@ -41,7 +41,7 @@
                                 <i class="fal fa-user"></i>
                             </span>
                             <div class="select is-fullwidth">
-                                <select id="player_b" v-model="player_b">
+                                <select id="player_b" v-model="form.player_b">
                                     <option value="" selected disabled>Choisir un joueur</option>
                                     <option :value="player.id" v-for="player in playersB.all()">{{ player.name }}</option>
                                 </select>
@@ -56,7 +56,7 @@
                             <span class="icon is-left">
                                 <i class="fas fa-futbol"></i>
                             </span>
-                            <input type="number" id="score_b" class="input" v-model="score_b">
+                            <input type="number" id="score_b" class="input" v-model="form.score_b">
                         </div>
                     </div>
                 </div>
@@ -91,28 +91,38 @@
         name: 'GamesCreate',
         data () {
             return {
-                player_a: null,
-                player_b: null,
-                score_a: null,
-                score_b: null
+                form: {
+                    player_a: null,
+                    player_b: null,
+                    score_a: null,
+                    score_b: null
+                },
             }
         },
         computed: {
             ...Vuex.mapGetters(['players']),
 
+            /**
+             * Collection of available A players
+             * @returns {*}
+             */
             playersA () {
-                if (this.player_b === null) return this.players
+                if (this.form.player_b === null) return this.players
 
                 return this.players.except(
-                    this.players.first(player => player.id === this.player_b)
+                    this.players.first(player => player.id === this.form.player_b)
                 )
             },
 
+            /**
+             * Collection of available B players
+             * @returns {*}
+             */
             playersB () {
-                if (this.player_a === null) return this.players
+                if (this.form.player_a === null) return this.players
 
                 return this.players.except(
-                    this.players.first(player => player.id === this.player_a)
+                    this.players.first(player => player.id === this.form.player_a)
                 )
             }
         },
