@@ -6,6 +6,14 @@
                 <div class="container">
                     <h1 class="title is-size-1-desktop">{{ name }}</h1>
                     <h2 class="subtitle is-size-3-desktop">{{ title }}</h2>
+                    <p class="has-text-centered" v-show="$route.name !== 'games.create'">
+                        <router-link :to="{ name: 'games.create' }" class="button is-primary is-rounded is-inverted is-size-5-desktop">
+                            <span class="icon">
+                                <i class="fas fa-futbol"></i>
+                            </span>
+                            <span class="has-text-grey-dark">Ajouter un match</span>
+                        </router-link>
+                    </p>
                 </div>
             </div>
             <div class="hero-foot">
@@ -13,7 +21,7 @@
                     <div class="level">
                         <!-- NAV -->
                         <div class="level-left">
-                            <nav class="tabs is-medium">
+                            <nav class="tabs is-size-5-desktop is-centered">
                                 <ul>
                                     <li :class="{ 'is-active': $route.name === 'players.index' }">
                                         <router-link :to="{ name: 'players.index' }">
@@ -29,21 +37,6 @@
                                                 <i class="fal fa-gamepad"></i>
                                             </span>
                                             <span>Matchs</span>
-                                        </router-link>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div>
-                        <!-- NEW MATCH -->
-                        <div class="level-right is-hidden-mobile">
-                            <nav class="tabs is-medium">
-                                <ul>
-                                    <li :class="{ 'is-active': $route.name === 'games.create' }">
-                                        <router-link :to="{ name: 'games.create' }">
-                                            <span class="icon">
-                                                <i class="far fa-plus"></i>
-                                            </span>
-                                            <span>Ajouter un match</span>
                                         </router-link>
                                     </li>
                                 </ul>
