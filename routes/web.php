@@ -13,8 +13,14 @@
 
 Route::get('/', 'HomeController');
 
-Route::resource('/games', 'GameController')
-    ->except('create', 'edit');
+Route::prefix('api')->group(function() {
 
-Route::resource('/players', 'PlayerController')
-    ->only('index', 'show');
+    Route::resource('/games', 'GameController')
+        ->except('create', 'edit');
+
+    Route::resource('/players', 'PlayerController')
+        ->only('index', 'show');
+
+});
+
+Route::get('/{vue}', 'HomeController')->where('vue', '.*');
