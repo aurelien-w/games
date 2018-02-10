@@ -1,6 +1,6 @@
 # Game leaderboard
 
-This is a Laravel port of the original repository. And has been enhanced a little bit 😉 
+This is a Laravel port of the original repository. It has been enhanced a little bit 😉 
 
 #### Installation
 ```shell
