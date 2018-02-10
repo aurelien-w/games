@@ -64,7 +64,7 @@
             <!-- BUTTONS -->
             <div class="level is-mobile">
                 <div class="level-left">
-                    <button class="button is-danger is-outlined is-size-7-touch" @click="$emit('close')">
+                    <button class="button is-danger is-outlined is-size-7-touch" @click="close">
                         <span class="icon">
                             <i class="fal fa-times"></i>
                         </span>
@@ -128,7 +128,26 @@
         },
         methods: {
             ...Vuex.mapActions(['fetchPlayers']),
+            /**
+             * Rests the form
+             */
+            reset () {
+                this.form = {
+                    player_a: null,
+                    player_b: null,
+                    score_a: null,
+                    score_b: null
+                }
+            },
 
+            /**
+             * Close event emitter
+             * @param event
+             */
+            close (event = null) {
+                this.reset()
+                this.$emit('close', event)
+            },
             submit (event) {
 
             }
