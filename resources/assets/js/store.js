@@ -36,6 +36,13 @@ const mutations = {
      * @param entities - Game entities
      */
     FETCH_GAMES: (state, entities) => state.games = collect(entities),
+
+    /**
+     * Adds a newly created game to the games state
+     * @param state - Store state
+     * @param entity - Game entity
+     */
+    SOTRE_GAME: (state, entity) => state.games.push(entity)
 }
 
 const actions = {
@@ -60,6 +67,19 @@ const actions = {
                 response => store.commit('FETCH_GAMES', response.data)
             )
             .catch(console.error)
+    },
+
+    /**
+     * Stores a new game entity
+     * @param store
+     * @param data - Form data
+     * @returns {Promise<void>}
+     */
+    storeGame (store, data) {
+        return window.axios.post('games', data)
+            .then(
+                response => store.commit('STORE_GAME', response.data)
+            )
     }
 }
 
