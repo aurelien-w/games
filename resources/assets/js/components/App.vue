@@ -4,12 +4,8 @@
             <!-- TITLE -->
             <div class="hero-body">
                 <div class="container">
-                    <h1 class="title is-1">
-                        FIFA
-                    </h1>
-                    <h2 class="subtitle is-3">
-                        Classement général
-                    </h2>
+                    <h1 class="title is-size-1-desktop">{{ name }}</h1>
+                    <h2 class="subtitle is-size-3-desktop">{{ title }}</h2>
                 </div>
             </div>
             <div class="hero-foot">
@@ -67,6 +63,20 @@
 
 <script>
     export default {
-        name: 'App'
+        name: 'App',
+        data () {
+            return {
+                name: 'FIFA'
+            }
+        },
+        computed: {
+            title () {
+                if (this.$route.meta.hasOwnProperty('title')) {
+                    return this.$route.meta.title
+                }
+
+                return 'Classement général'
+            }
+        }
     }
 </script>
