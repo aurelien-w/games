@@ -3,8 +3,11 @@ import Vue from 'vue'
 import router from './routes'
 import store from './store'
 
-import App from './components/App.vue'
+import App from './components/App'
+import Modal from './components/Modal'
 
+
+Vue.component('Modal', Modal)
 Vue.mixin({
     data () {
         return {
