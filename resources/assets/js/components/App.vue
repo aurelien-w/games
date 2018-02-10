@@ -20,7 +20,7 @@
                             <nav class="tabs is-medium">
                                 <ul>
                                     <li :class="{ 'is-active': $route.name === 'players.index' }">
-                                        <router-link to="/">
+                                        <router-link :to="{ name: 'players.index' }">
                                             <span class="icon">
                                                 <i class="fal fa-trophy-alt"></i>
                                             </span>
@@ -28,7 +28,7 @@
                                         </router-link>
                                     </li>
                                     <li  :class="{ 'is-active': $route.name === 'games.index' }">
-                                        <router-link to="/games">
+                                        <router-link :to="{ name: 'games.index' }">
                                             <span class="icon">
                                                 <i class="fal fa-gamepad"></i>
                                             </span>
@@ -43,7 +43,7 @@
                             <nav class="tabs is-medium">
                                 <ul>
                                     <li :class="{ 'is-active': $route.name === 'games.create' }">
-                                        <router-link to="games/create">
+                                        <router-link :to="{ name: 'games.create' }">
                                             <span class="icon">
                                                 <i class="far fa-plus"></i>
                                             </span>
