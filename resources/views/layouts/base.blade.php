@@ -9,6 +9,7 @@
     <title>@yield('title', config('app.name'))</title>
 
     @section('styles')
+        <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,700" rel="stylesheet">
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
     @show
 </head>
