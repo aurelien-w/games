@@ -1,19 +1,9 @@
 import Vue from 'vue'
-import axios from 'axios'
 
 import router from './routes'
+import store from './store'
 
 import App from './components/App.vue'
-
-window.axios = axios.create({
-    baseURL: window.location.origin + '/api/',
-    headers: {
-        'X-Requested-With': 'XMLHttpRequest',
-        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-    }
-})
 
 Vue.mixin({
     data () {
@@ -35,5 +25,6 @@ new Vue({
     el: '#app',
     components: { App },
     template: '<App/>',
+    store,
     router
 })
