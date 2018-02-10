@@ -76,8 +76,8 @@ class GameController extends Controller
         return $request->validate([
             'player_a' => 'required|different:player_b|exists:player,id',
             'player_b' => 'required|different:player_a|exists:player,id',
-            'score_a'  => 'required|numeric|min:0',
-            'score_b'  => 'required|numeric|min:0'
+            'score_a'  => 'required|numeric|integer|min:0',
+            'score_b'  => 'required|numeric|integer|min:0'
         ]);
     }
 }
