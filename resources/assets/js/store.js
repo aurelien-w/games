@@ -27,7 +27,6 @@ const mutations = {
      * Updates the players state
      * @param state - Store statte
      * @param entities - Player entities
-     * @returns {*}
      */
     FETCH_PLAYERS: (state, entities) => state.players = collect(entities),
 
@@ -35,15 +34,14 @@ const mutations = {
      * Updates the games state
      * @param state - Store state
      * @param entities - Game entities
-     * @returns {*}
      */
-    FETCH_GAMES: (state, entities) => state.games = collect(entities)
+    FETCH_GAMES: (state, entities) => state.games = collect(entities),
 }
 
 const actions = {
     /**
      * Fetches the players from the API
-     * @param store - Store state
+     * @param store
      */
     fetchPlayers (store) {
         window.axios.get('players')
@@ -54,7 +52,7 @@ const actions = {
     },
     /**
      * Fetches the games from the API
-     * @param store - Store state
+     * @param store
      */
     fetchGames (store) {
         window.axios.get('games')
