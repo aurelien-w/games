@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import axios from 'axios'
 
+import router from './routes'
 window.axios = axios.create({
     baseURL: window.location.origin,
     headers: {
@@ -17,4 +18,5 @@ new Vue({
     el: '#app',
     components: { App },
     template: '<App/>'
+    router
 })
