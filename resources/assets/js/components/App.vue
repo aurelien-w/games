@@ -52,9 +52,11 @@
             </keep-alive>
         </transition>
         <!-- MODAL -->
-        <modal v-show="gameCreateModal" @close="gameCreateModal = false" :close="false">
+        <modal v-show="gameCreateModal" @close="gameCreateModal = false" :dismissable="false">
             <games-create @close="gameCreateModal = false"></games-create>
         </modal>
+        <!-- FLASH -->
+        <flash></flash>
     </div>
 </template>
 
