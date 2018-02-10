@@ -52,7 +52,7 @@
             </keep-alive>
         </transition>
         <!-- MODAL -->
-        <modal v-show="gameCreateModal" @close="gameCreateModal = false">
+        <modal v-show="gameCreateModal" @close="gameCreateModal = false" :close="false">
             <games-create @close="gameCreateModal = false"></games-create>
         </modal>
     </div>

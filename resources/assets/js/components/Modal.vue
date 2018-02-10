@@ -4,19 +4,22 @@
         <div class="modal-content">
             <slot></slot>
         </div>
-        <button class="modal-close is-large" aria-label="close" @click="close"></button>
+        <button class="modal-close is-large" aria-label="close" @click="onClose" v-if="close"></button>
     </div>
 </template>
 
 <script>
     export default {
         name: 'Modal',
+        props: {
+            close: { default: true }
+        },
         methods: {
             /**
              * Close event
              * @param event
              */
-            close (event = null) {
+            onClose (event = null) {
                 this.$emit('close', event)
             }
         }
