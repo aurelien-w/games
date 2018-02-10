@@ -72,7 +72,7 @@ const getters = {
      * @returns {"collect.js".Collection<any> | *}
      */
     players (state) {
-        return state.players
+        return state.players.sortBy('name')
     },
 
     /**
