@@ -72,7 +72,7 @@
                     </button>
                 </div>
                 <div class="level-right">
-                    <button type="submit" class="button is-success is-outlined is-size-7-touch">
+                    <button type="submit" class="button is-success is-outlined is-size-7-touch" :disabled="!submittable">
                         <span>Sauvegarder</span>
                         <span class="icon">
                             <i class="fal fa-check"></i>
@@ -86,6 +86,7 @@
 
 <script>
     import Vuex from 'vuex'
+    import collect from 'collect.js'
 
     export default {
         name: 'GamesCreate',
@@ -97,6 +98,7 @@
                     score_a: null,
                     score_b: null
                 },
+                errors: collect({})
             }
         },
         computed: {
@@ -124,6 +126,14 @@
                 return this.players.except(
                     this.players.first(player => player.id === this.form.player_a)
                 )
+            },
+
+            /**
+             * Determines if the form is submittable
+             * @returns {boolean | *}
+             */
+            submittable () {
+                return this.errors.isEmpty() && !this.loading
             }
         },
         methods: {
