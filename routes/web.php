@@ -16,10 +16,10 @@ Route::get('/', 'HomeController');
 Route::prefix('api')->group(function() {
 
     Route::resource('/games', 'GameController')
-        ->except('create', 'edit');
+        ->only('index', 'store');
 
     Route::resource('/players', 'PlayerController')
-        ->only('index', 'show');
+        ->only('index');
 
 });
 
