@@ -42,7 +42,7 @@ const mutations = {
      * @param state - Store state
      * @param entity - Game entity
      */
-    SOTRE_GAME: (state, entity) => state.games.push(entity)
+    STORE_GAME: (state, entity) => state.games.push(entity)
 }
 
 const actions = {
