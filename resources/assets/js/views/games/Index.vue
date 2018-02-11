@@ -1,5 +1,5 @@
 <template>
-    <div class="columns is-multiline">
+    <div class="columns is-multiline is-mobile">
         <!-- HEADING -->
         <div class="column is-3">
             <span class="heading">Joueur A</span>
@@ -19,7 +19,7 @@
         <!-- DATA -->
         <div class="column is-12" v-for="game in games.all()" :key="game.id">
             <div class="box">
-                <div class="columns is-center-aligned">
+                <div class="columns is-center-aligned is-mobile">
                     <div class="column is-3">
                         <p>{{ game.player_a.name }}</p>
                     </div>
