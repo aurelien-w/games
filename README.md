@@ -5,7 +5,7 @@ This is a Laravel port of the original repository. It has been enhanced a little
 #### Installation
 ```shell
 # Clone the project
-git clone -b laravel --single-branch https://github.com/NicolasMica/games.git
+git clone https://github.com/NicolasMica/games.git
 cd games
  
 # Copy and fill the config file
