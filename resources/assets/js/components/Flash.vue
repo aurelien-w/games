@@ -1,5 +1,5 @@
 <template>
-    <div class="notification is-size-7-touch" :class="classes" v-show="show">
+    <div class="notification is-size-7-touch" :class="[type, classes]" v-show="show">
         <button class="delete" @click="close" v-if="dismissable"></button>
         <slot>
             <div class="columns is-center-aligned is-mobile">
@@ -45,23 +45,22 @@
         },
         computed: {
             /**
+             * Determines if the notification should be fixed
+             */
+            isFixed () {
+                return this.fixed.top || this.fixed.right || this.fixed.bottom || this.fixed.left
+            },
+            /**
              * Handles notification classes combinaison
              */
             classes () {
-                let classes = ''
-
-                if (this.type !== null) classes += ` ${this.type}`
-
-                if (this.fixed.top || this.fixed.right || this.fixed.bottom || this.fixed.left) {
-                    classes  += ` is-fixed`
-
-                    if (this.fixed.top) classes    += ` is-top`
-                    if (this.fixed.right) classes  += ` is-right`
-                    if (this.fixed.bottom) classes += ` is-bottom`
-                    if (this.fixed.left) classes   += ` is-left`
+                return { 
+                    'is-fixed': this.isFixed, 
+                    'is-top': this.fixed.top, 
+                    'is-right': this.fixed.right,
+                    'is-bottom': this.fixed.bottom,
+                    'is-left': this.fixed.left,
                 }
-
-                return classes
             }
         },
         methods: {
