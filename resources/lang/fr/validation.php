@@ -145,8 +145,8 @@ return [
         'time' => 'heure',
         'available' => 'disponible',
         'size' => 'taille',
-        'player_a' => 'joueur A',
-        'player_b' => 'joueur B',
+        'player_a_id' => 'joueur A',
+        'player_b_id' => 'joueur B',
         'score_a' => 'score A',
         'score_b' => 'score B'
     ],

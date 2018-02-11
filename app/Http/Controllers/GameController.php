@@ -79,8 +79,8 @@ class GameController extends Controller
      */
     protected function validates(Request $request) {
         return $request->validate([
-            'player_a' => 'required|different:player_b|exists:player,id',
-            'player_b' => 'required|different:player_a|exists:player,id',
+            'player_a_id' => 'required|different:player_b_id|exists:player,id',
+            'player_b_id' => 'required|different:player_a_id|exists:player,id',
             'score_a'  => 'required|numeric|integer|min:0',
             'score_b'  => 'required|numeric|integer|min:0'
         ]);

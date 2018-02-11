@@ -5,20 +5,20 @@
             <div class="columns">
                 <div class="column">
                     <div class="field">
-                        <label for="player_a" class="label">Joueur A</label>
+                        <label for="player_a_id" class="label">Joueur A</label>
                         <div class="control is-expanded has-icons-left">
                             <span class="icon is-left">
                                 <i class="fal fa-user"></i>
                             </span>
-                            <div class="select is-fullwidth" :class="{ 'is-danger': errors.has('player_a') }">
-                                <select id="player_a" v-model="form.player_a">
+                            <div class="select is-fullwidth" :class="{ 'is-danger': errors.has('player_a_id') }">
+                                <select id="player_a_id" v-model="form.player_a_id">
                                     <option selected disabled>Joueur A</option>
                                     <option :value="player.id" v-for="player in playersA.all()">{{ player.name }}</option>
                                 </select>
                             </div>
                         </div>
-                        <ul class="help is-danger" v-show="errors.has('player_a')">
-                            <li v-for="error in errors.get('player_a')">
+                        <ul class="help is-danger" v-show="errors.has('player_a_id')">
+                            <li v-for="error in errors.get('player_a_id')">
                                 {{ error }}
                             </li>
                         </ul>
@@ -49,20 +49,20 @@
             <div class="columns">
                 <div class="column">
                     <div class="field">
-                        <label for="player_b" class="label">Joueur B</label>
+                        <label for="player_b_id" class="label">Joueur B</label>
                         <div class="control is-expanded has-icons-left">
                             <span class="icon is-left">
                                 <i class="fal fa-user"></i>
                             </span>
-                            <div class="select is-fullwidth" :class="{ 'is-danger': errors.has('player_b') }">
-                                <select id="player_b" name="player_b" v-model="form.player_b">
+                            <div class="select is-fullwidth" :class="{ 'is-danger': errors.has('player_b_id') }">
+                                <select id="player_b_id" name="player_b_id" v-model="form.player_b_id">
                                     <option selected disabled>Joueur B</option>
                                     <option :value="player.id" v-for="player in playersB.all()">{{ player.name }}</option>
                                 </select>
                             </div>
                         </div>
-                        <ul class="help is-danger" v-show="errors.has('player_b')">
-                            <li v-for="error in errors.get('player_b')">
+                        <ul class="help is-danger" v-show="errors.has('player_b_id')">
+                            <li v-for="error in errors.get('player_b_id')">
                                 {{ error }}
                             </li>
                         </ul>
@@ -124,8 +124,8 @@
         data () {
             return {
                 form: {
-                    player_a: null,
-                    player_b: null,
+                    player_a_id: null,
+                    player_b_id: null,
                     score_a: null,
                     score_b: null
                 },
@@ -140,10 +140,10 @@
              * @returns {*}
              */
             playersA () {
-                if (this.form.player_b === null) return this.players
+                if (this.form.player_b_id === null) return this.players
 
                 return this.players.except(
-                    this.players.first(player => player.id === this.form.player_b)
+                    this.players.first(player => player.id === this.form.player_b_id)
                 )
             },
 
@@ -152,10 +152,10 @@
              * @returns {*}
              */
             playersB () {
-                if (this.form.player_a === null) return this.players
+                if (this.form.player_a_id === null) return this.players
 
                 return this.players.except(
-                    this.players.first(player => player.id === this.form.player_a)
+                    this.players.first(player => player.id === this.form.player_a_id)
                 )
             },
 
@@ -175,8 +175,8 @@
              */
             reset () {
                 this.form = {
-                    player_a: null,
-                    player_b: null,
+                    player_a_id: null,
+                    player_b_id: null,
                     score_a: null,
                     score_b: null
                 }
