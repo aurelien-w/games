@@ -168,7 +168,8 @@
             }
         },
         methods: {
-            ...Vuex.mapActions(['fetchPlayers']),
+            ...Vuex.mapActions(['fetchPlayers', 'storeGame']),
+
             /**
              * Rests the form
              */
@@ -191,8 +192,24 @@
                 this.reset()
                 this.$emit('close', event)
             },
-            submit (event) {
 
+            /**
+             * Handles form submission
+             * @param event
+             */
+            submit (event) {
+                if (!this.submittable) return
+
+                this.toggleLoading()
+                this.storeGame(this.form)
+                    .then(
+                        () => this.close(event)
+                    )
+                    .catch(({ response }) => {
+                        flash(response.data.message)
+                        this.errors = collect(response.data.errors)
+                    })
+                    .then(this.toggleLoading)
             }
         },
         created () {
