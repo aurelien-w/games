@@ -50,7 +50,7 @@ class Player extends Model
     {
         return $this->games()->filter(function(Game $game) {
             return $this->hasWon($game);
-        });
+        })->values();
     }
 
     /**
@@ -61,7 +61,7 @@ class Player extends Model
     {
         return $this->games()->filter(function(Game $game) {
             return $this->hasLost($game);
-        });
+        })->values();
     }
 
     /**
@@ -72,7 +72,7 @@ class Player extends Model
     {
         return $this->games()->filter(function(Game $game) {
             return $this->hasDraw($game);
-        });
+        })->values();
     }
 
     /**
