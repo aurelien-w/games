@@ -10,13 +10,18 @@
                             <span class="icon is-left">
                                 <i class="fal fa-user"></i>
                             </span>
-                            <div class="select is-fullwidth">
+                            <div class="select is-fullwidth" :class="{ 'is-danger': errors.has('player_a') }">
                                 <select id="player_a" v-model="form.player_a">
-                                    <option value="" selected disabled>Choisir un joueur</option>
+                                    <option selected disabled>Joueur A</option>
                                     <option :value="player.id" v-for="player in playersA.all()">{{ player.name }}</option>
                                 </select>
                             </div>
                         </div>
+                        <ul class="help is-danger" v-show="errors.has('player_a')">
+                            <li v-for="error in errors.get('player_a')">
+                                {{ error }}
+                            </li>
+                        </ul>
                     </div>
                 </div>
                 <div class="column is-narrow">
@@ -26,8 +31,17 @@
                             <span class="icon is-left">
                                 <i class="fas fa-futbol"></i>
                             </span>
-                            <input type="number" id="score_a" class="input" v-model="form.score_a">
+                            <input type="number"
+                                   id="score_a"
+                                   class="input"
+                                   :class="{ 'is-danger': errors.has('score_a') }"
+                                   v-model="form.score_a">
                         </div>
+                        <ul class="help is-danger" v-show="errors.has('score_a')">
+                            <li v-for="error in errors.get('score_a')">
+                                {{ error }}
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -40,13 +54,18 @@
                             <span class="icon is-left">
                                 <i class="fal fa-user"></i>
                             </span>
-                            <div class="select is-fullwidth">
-                                <select id="player_b" v-model="form.player_b">
-                                    <option value="" selected disabled>Choisir un joueur</option>
+                            <div class="select is-fullwidth" :class="{ 'is-danger': errors.has('player_b') }">
+                                <select id="player_b" name="player_b" v-model="form.player_b">
+                                    <option selected disabled>Joueur B</option>
                                     <option :value="player.id" v-for="player in playersB.all()">{{ player.name }}</option>
                                 </select>
                             </div>
                         </div>
+                        <ul class="help is-danger" v-show="errors.has('player_b')">
+                            <li v-for="error in errors.get('player_b')">
+                                {{ error }}
+                            </li>
+                        </ul>
                     </div>
                 </div>
                 <div class="column is-narrow">
@@ -56,15 +75,24 @@
                             <span class="icon is-left">
                                 <i class="fas fa-futbol"></i>
                             </span>
-                            <input type="number" id="score_b" class="input" v-model="form.score_b">
+                            <input type="number"
+                                   id="score_b"
+                                   class="input"
+                                   :class="{ 'is-danger': errors.has('score_b') }"
+                                   v-model="form.score_b">
                         </div>
+                        <ul class="help is-danger" v-show="errors.has('score_b')">
+                            <li v-for="error in errors.get('score_b')">
+                                {{ error }}
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
             <!-- BUTTONS -->
             <div class="level is-mobile">
                 <div class="level-left">
-                    <button class="button is-danger is-outlined is-size-7-touch" @click="close">
+                    <button type="button" class="button is-danger is-outlined is-size-7-touch" @click.prevent="close">
                         <span class="icon">
                             <i class="fal fa-times"></i>
                         </span>
@@ -72,7 +100,10 @@
                     </button>
                 </div>
                 <div class="level-right">
-                    <button type="submit" class="button is-success is-outlined is-size-7-touch" :disabled="!submittable">
+                    <button type="submit"
+                            class="button is-success is-outlined is-size-7-touch"
+                            :class="{ 'is-loading' : loading }"
+                            :disabled="!submittable">
                         <span>Sauvegarder</span>
                         <span class="icon">
                             <i class="fal fa-check"></i>
@@ -148,6 +179,8 @@
                     score_a: null,
                     score_b: null
                 }
+
+                this.errors = collect({})
             },
 
             /**
