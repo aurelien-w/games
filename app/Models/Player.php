@@ -14,18 +14,6 @@ class Player extends Model
     protected $table = 'player';
 
     /**
-     * Hidden properties
-     * @var array
-     */
-    protected $hidden = ['games_a', 'games_b'];
-
-    /**
-     * Serialized dynamic properties
-     * @var array
-     */
-    protected $appends = ['games'];
-
-    /**
      * A Player hasMany "A" Games
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
@@ -47,12 +35,8 @@ class Player extends Model
      * A Player hasMany Games
      * @return Collection
      */
-    public function getGamesAttribute()
+    public function games()
     {
-        if (!$this->relationLoaded('games_a') || !$this->relationLoaded('games_b')) {
-            return new Collection();
-        }
-
         return (
             new Collection($this->games_a)
         )->concat($this->games_b);
