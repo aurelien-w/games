@@ -1,0 +1,47 @@
+.notification {
+    &.is-fixed {
+        position: fixed;
+
+        z-index: $modal-z + 1;
+
+        &.is-top {
+            top: $gap / 2;
+        }
+
+        @include desktop {
+            &.is-top {
+                top: $gap;
+            }
+        }
+
+        &.is-bottom {
+            bottom: $gap / 2;
+        }
+
+        @include desktop {
+            &.is-bottom {
+                bottom: $gap;
+            }
+        }
+
+        &.is-right {
+            right: $gap / 2;
+        }
+
+        @include desktop {
+            &.is-right {
+                right: $gap;
+            }
+        }
+
+        &.is-left {
+            left: $gap / 2;
+        }
+
+        @include desktop {
+            &.is-left {
+                left: $gap;
+            }
+        }
+    }
+}
