@@ -30,7 +30,11 @@ class GameController extends Controller
     {
         $data = $this->validates($request);
 
-        return Game::create($data);
+        $game = new Game($data);
+        $game->assignRanks()
+            ->save();
+
+        return $game;
     }
 
     /**

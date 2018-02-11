@@ -14,6 +14,14 @@ class Player extends Model
     protected $table = 'player';
 
     /**
+     * Mass assignable fields
+     * @var array
+     */
+    protected $fillable = [
+        'rank'
+    ];
+
+    /**
      * A Player hasMany "A" Games
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */

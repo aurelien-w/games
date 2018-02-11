@@ -17,7 +17,7 @@ class Game extends Model
      * @var array
      */
     protected $fillable = [
-        'player_a_id', 'player_b_id', 'score_a', 'score_b'
+        'player_a_id', 'player_b_id', 'score_a', 'score_b', 'rank_a', 'rank_b'
     ];
 
     /**
@@ -70,5 +70,45 @@ class Game extends Model
         }
 
         return null;
+    }
+
+    /**
+     * Assigns the players' new rank
+     * @return Game
+     */
+    public function assignRanks()
+    {
+        $ranking = app('App\Ranking');
+
+        if ($this->player_a->hasDraw($this)) {
+            $scoreA = $ranking::DRAW;
+            $scoreB = $ranking::DRAW;
+        } elseif ($this->player_a->hasWon($this)) {
+            $scoreA = $ranking::WIN;
+            $scoreB = $ranking::LOST;
+        } else {
+            $scoreA = $ranking::LOST;
+            $scoreB = $ranking::WIN;
+        }
+
+        $ranks = $ranking->setNewSettings(
+            $this->player_a->rank,
+            $this->player_b->rank,
+            $scoreA,
+            $scoreB
+        );
+
+        $this->player_a->update([
+            'rank' => $ranks['ratingA']
+        ]);
+
+        $this->player_b->update([
+            'rank' => $ranks['ratingB']
+        ]);
+
+        return $this->fill([
+            'rank_a' => $ranks['diffA'],
+            'rank_b' => $ranks['diffB']
+        ]);
     }
 }
