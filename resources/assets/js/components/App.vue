@@ -56,7 +56,7 @@
             <games-create @close="gameCreateModal = false"></games-create>
         </modal>
         <!-- FLASH -->
-        <flash></flash>
+        <flash channel="flash"></flash>
     </div>
 </template>
 

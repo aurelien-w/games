@@ -5,9 +5,11 @@ import store from './store'
 
 import App from './components/App'
 import Modal from './components/Modal'
+import Flash from './components/Flash'
 
-
+Vue.component('Flash', Flash)
 Vue.component('Modal', Modal)
+
 Vue.mixin({
     data () {
         return {
