@@ -23,10 +23,12 @@ class PlayerController extends Controller
      * Display the specified resource.
      *
      * @param int $player
-     * @return Player|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model
+     * @return PlayerResource
      */
     public function show($player)
     {
-        return Player::with('games_a', 'games_b')->findOrFail($player);
+        $player = Player::with('games_a', 'games_b')->findOrFail($player);
+
+        return new PlayerResource($player);
     }
 }

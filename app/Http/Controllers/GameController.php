@@ -37,11 +37,13 @@ class GameController extends Controller
      * Display the specified resource.
      *
      * @param int $game
-     * @return Game|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model
+     * @return GameResource
      */
     public function show($game)
     {
-        return Game::with('player_a', 'player_b')->findOrFail($game);
+        $game = Game::with('player_a', 'player_b')->findOrFail($game);
+
+        return new GameResource($game);
     }
 
     /**
