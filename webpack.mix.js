@@ -1,4 +1,5 @@
 let mix = require('laravel-mix')
+require('laravel-mix-purgecss')
 
 /*
  |--------------------------------------------------------------------------
@@ -19,6 +20,7 @@ mix.js('resources/assets/js/app.js', 'public/js')
 
 if (mix.inProduction()) {
     mix.version()
+        .purgeCss()
 } else {
     mix.sourceMaps()
 }
