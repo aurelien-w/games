@@ -30,11 +30,45 @@ class Game extends Model
     }
 
     /**
-     *
+     * A Game belongsTo a Player
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function player_b()
     {
         return $this->belongsTo(Player::class, 'player_b_id');
+    }
+
+    /**
+     * Player entity of the winner
+     * @return Player|null
+     */
+    public function winner()
+    {
+        $this->loadMissing('player_a', 'player_b');
+
+        if ($this->score_a > $this->score_b) {
+            return $this->player_a;
+        } elseif ($this->score_b > $this->score_a) {
+            return $this->player_b;
+        }
+
+        return null;
+    }
+
+    /**
+     * Player entity of the looser
+     * @return Player|null
+     */
+    public function looser()
+    {
+        $this->loadMissing('player_a', 'player_b');
+
+        if ($this->score_a < $this->score_b) {
+            return $this->player_a;
+        } elseif ($this->score_b < $this->score_a) {
+            return $this->player_b;
+        }
+
+        return null;
     }
 }
