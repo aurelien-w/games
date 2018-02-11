@@ -8,13 +8,13 @@
             <span class="heading">Nom</span>
         </div>
         <div class="column is-1 is-hidden-mobile">
-            <span class="heading">Victoire</span>
+            <span class="heading">Victoires</span>
         </div>
         <div class="column is-1 is-hidden-mobile">
-            <span class="heading">Nul</span>
+            <span class="heading">&Eacute;galités</span>
         </div>
         <div class="column is-1 is-hidden-mobile">
-            <span class="heading">Défaite</span>
+            <span class="heading">Défaites</span>
         </div>
         <div class="column is-3-mobile is-2-tablet is-offset-1-tablet">
             <span class="heading">Points</span>
@@ -35,13 +35,13 @@
                         <p>{{ player.name }}</p>
                     </div>
                     <div class="column is-1 is-hidden-mobile">
-                        <p class="has-text-centered">0</p>
+                        <p class="has-text-centered">{{ player.victories.length }}</p>
                     </div>
                     <div class="column is-1 is-hidden-mobile">
-                        <p class="has-text-centered">0</p>
+                        <p class="has-text-centered">{{ player.draws.length }}</p>
                     </div>
                     <div class="column is-1 is-hidden-mobile">
-                        <p class="has-text-centered">0</p>
+                        <p class="has-text-centered">{{ player.losses.length }}</p>
                     </div>
                     <div class="column is-3-mobile is-2-tablet is-offset-1-tablet">
                         <p class="has-text-centered">{{ player.rank }}</p>
