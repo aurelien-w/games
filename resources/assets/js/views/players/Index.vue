@@ -20,7 +20,7 @@
             <span class="heading">Points</span>
         </div>
         <!-- DATA -->
-        <div class="column is-12" v-for="(player, i) in players.all()" :key="player.id">
+        <div class="column is-12" v-for="(player, i) in players.sortByDesc('rank').all()" :key="player.id">
             <div class="box">
                 <div class="columns is-center-aligned is-mobile">
                     <!-- TROPHY -->

@@ -17,7 +17,7 @@
             <span class="heading">Joueur B</span>
         </div>
         <!-- DATA -->
-        <div class="column is-12" v-for="game in games.all()" :key="game.id">
+        <div class="column is-12" v-for="game in games.sortByDesc('created_at').all()" :key="game.id">
             <div class="box">
                 <div class="columns is-center-aligned is-mobile">
                     <div class="column is-3">
