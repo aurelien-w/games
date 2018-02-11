@@ -39,6 +39,24 @@ class Game extends Model
     }
 
     /**
+     * Rounds the rank_a field
+     * @param $value
+     */
+    public function setRankAAttribute($value)
+    {
+        $this->attributes['rank_a'] = round($value);
+    }
+
+    /**
+     * Rounds the rank_b field
+     * @param $value
+     */
+    public function setRankBAttribute($value)
+    {
+        $this->attributes['rank_b'] = round($value);
+    }
+
+    /**
      * Player entity of the winner
      * @return Player|null
      */
