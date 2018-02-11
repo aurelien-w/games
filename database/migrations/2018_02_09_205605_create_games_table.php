@@ -13,7 +13,7 @@ class CreateGamesTable extends Migration
      */
     public function up()
     {
-        Schema::create('games', function (Blueprint $table) {
+        Schema::create('duel', function (Blueprint $table) {
             $table->increments('id');
 
             $table->unsignedInteger('player_a_id')
@@ -47,6 +47,6 @@ class CreateGamesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('games');
+        Schema::dropIfExists('duel');
     }
 }
