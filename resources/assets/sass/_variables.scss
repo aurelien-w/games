@@ -1,0 +1,65 @@
+/**
+ * Branding
+ */
+$gold: #CFB53B !default;
+$silver: #E6E8FA !default;
+$bronze: #8C7853 !default;
+
+$gold-invert: findColorInvert($gold) !default;
+$silver-invert: findColorInvert($silver) !default;
+$bronze-invert: findColorInvert($bronze) !default;
+
+/**
+ * Utilities
+ */
+
+$img-path: "../img/" !default;
+
+// Colors
+$addColors: (
+    "gold":($gold, $gold-invert),
+    "silver": ($silver, $silver-invert),
+    "bronze": ($bronze, $bronze-invert)
+);
+$colors: map-merge($colors, $addColors);
+
+/**
+ * Base
+ */
+
+// Generic
+$family-primary: 'Poppins', $family-sans-serif;
+$text: #000;
+$text-strong: $text;
+$body-background-color : #F5F7FA;
+
+/**
+ * Elements
+ */
+
+// Title
+$title-weight: $weight-normal;
+
+// Box
+$box-radius: .5rem;
+$box-shadow: 0 15px 35px rgba(50,50,93,.1), 0 5px 15px rgba(0,0,0,.07);
+$box-transition: transform .4s;
+
+/**
+ * Components
+ */
+
+// Modal
+$modal-content-spacing-mobile: 5rem;
+
+/**
+ * Grid
+ */
+
+
+/**
+ * Layout
+ */
+
+// Footer
+$footer-background-color: transparent;
