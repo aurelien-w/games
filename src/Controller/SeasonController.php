@@ -181,7 +181,7 @@ class SeasonController extends Controller {
      */
     public function saveScore(Request $request, $id)
     {
-        if (!empty($request->query->get('score-a')) && !empty($request->query->get('score-b'))) {
+        if ("" !== $request->query->get('score-a') && "" !== $request->query->get('score-b')) {
             $em = $this->getDoctrine()->getManager();
 
             $duel = $em->getRepository('App:SeasonDuel')->find($id);
