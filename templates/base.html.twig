@@ -17,8 +17,9 @@
             </nav>
         </header>
 
-
-        {% block body %}{% endblock %}
+        <div id="app">
+            {% block body %}{% endblock %}
+        </div>
 
         {% block javascripts %}
             <script src="{{ asset('build/manifest.js') }}"></script>

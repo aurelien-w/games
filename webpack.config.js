@@ -10,6 +10,8 @@ Encore
     // will create public/build/main.js and public/build/main.css
     .addEntry('app', './assets/js/app.js')
 
+    .enableVueLoader()
+
     // this creates a 'vendor.js' file with jquery and the bootstrap JS module
     // these modules will *not* be included in page1.js or page2.js anymore
     .createSharedEntry('vendor', [

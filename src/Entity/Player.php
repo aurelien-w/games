@@ -13,8 +13,9 @@ class Player
 {
     public function __construct()
     {
-        $this->duelsA = new ArrayCollection();
-        $this->duelsB = new ArrayCollection();
+        $this->duelsA           = new ArrayCollection();
+        $this->duelsB           = new ArrayCollection();
+        $this->playerSeasonData = new ArrayCollection();
     }
 
     /**
@@ -43,6 +44,13 @@ class Player
      * @ORM\OneToMany(targetEntity="App\Entity\Duel", mappedBy="playerB")
      */
     private $duelsB;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\PlayerSeasonData", mappedBy="player")
+     */
+    private $playerSeasonData;
 
     /**
      * @ORM\Column(type="datetime")
@@ -215,6 +223,22 @@ class Player
         }
 
         return $duelsEquality;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getPlayerSeasonData(): ArrayCollection
+    {
+        return $this->playerSeasonData;
+    }
+
+    /**
+     * @param ArrayCollection $playerSeasonData
+     */
+    public function setPlayerSeasonData(ArrayCollection $playerSeasonData): void
+    {
+        $this->playerSeasonData = $playerSeasonData;
     }
 
     /**
