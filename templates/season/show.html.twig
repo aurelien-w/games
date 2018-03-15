@@ -1,0 +1,81 @@
+{% extends 'fifa.html.twig' %}
+
+{% block body_actions %}
+    <a href="{{ path('season_index') }}" class="btn btn-primary">Retour</a>
+{% endblock %}
+
+{% block content %}
+    <div class="row margin-top">
+        <div class="col-lg">
+            <ul class="nav nav-tabs" id="today-season" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="ranking-tab" data-toggle="tab" href="#ranking" role="tab" aria-controls="ranking" aria-selected="true">Classement</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="duels-tab" data-toggle="tab" href="#duels" role="tab" aria-controls="duels" aria-selected="true">Matchs</a>
+                </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="ranking" role="tabpanel" aria-labelledby="ranking-tab">
+                    <table class="table margin-top">
+                        <thead>
+                        <tr class="bg-success text-white">
+                            <th scope="col">#</th>
+                            <th scope="col">Joueur</th>
+                            <th scope="col">J</th>
+                            <th scope="col">G</th>
+                            <th scope="col">N</th>
+                            <th scope="col">P</th>
+                            <th scope="col">Points</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for playerData in current_season.playerSeasonData %}
+                            <tr>
+                                <th scope="row">{{ loop.index }}</th>
+                                <td>{{ playerData.player.name }}</td>
+                                <td>{{ playerData.duelPlayed }}</td>
+                                <td>{{ playerData.duelWin }}</td>
+                                <td>{{ playerData.duelNull }}</td>
+                                <td>{{ playerData.duelLoose }}</td>
+                                <td>{{ playerData.rank }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tab-pane fade" id="duels" role="tabpanel" aria-labelledby="duels-tab">
+                    <table class="table margin-top text-center">
+                        <thead>
+                        <tr class="bg-success text-white">
+                            <th scope="col">Domicile</th>
+                            <th scope="col">Score</th>
+                            <th scope="col">Extérieur</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="text-center">
+                            <td><input type="text" class="form-control" placeholder="Filtrer" v-model="domFilter"></td>
+                            <td></td>
+                            <td><input type="text" class="form-control" placeholder="Filtrer" v-model="extFilter"></td>
+                        </tr>
+                        {% for duel in current_season.duels %}
+                            <tr v-show="showSeasonDuelRow('{{ duel.playerSeasonDataA.player.name }}', '{{ duel.playerSeasonDataB.player.name }}')">
+                                <td {% if not duel.scoreA is null %}class="{% if duel.scoreA > duel.scoreB %}text-success{% else %}text-danger{% endif %}"{% endif %}>{{ duel.playerSeasonDataA.player.name }}</td>
+                                <td class="text-center">
+                                    {% if not duel.scoreA is null and not duel.scoreB is null %}
+                                        {{ duel.scoreA }} - {{ duel.scoreB }}
+                                    {% else %}
+                                        Ce match n'a pas été joué.
+                                    {% endif %}
+                                </td>
+                                <td {% if not duel.scoreB is null %}class="{% if duel.scoreB > duel.scoreA %}text-success{% else %}text-danger{% endif %}"{% endif %}>{{ duel.playerSeasonDataB.player.name }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

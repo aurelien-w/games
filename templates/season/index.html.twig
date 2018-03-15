@@ -1,0 +1,195 @@
+{% extends 'fifa.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+{% endblock %}
+
+{% block content %}
+    <div class="row margin-top">
+        <div class="col-lg">
+            <h2>Saison en cours</h2>
+        </div>
+    </div>
+    {% if not current_season is null %}
+        <div class="row">
+            <div class="col-lg">
+                <ul class="nav nav-tabs" id="today-season" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="ranking-tab" data-toggle="tab" href="#ranking" role="tab" aria-controls="ranking" aria-selected="true">Classement</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="duels-tab" data-toggle="tab" href="#duels" role="tab" aria-controls="duels" aria-selected="true">Matchs</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="ranking" role="tabpanel" aria-labelledby="ranking-tab">
+                        <table class="table margin-top">
+                            <thead>
+                            <tr class="bg-success text-white">
+                                <th scope="col">#</th>
+                                <th scope="col">Joueur</th>
+                                <th scope="col">J</th>
+                                <th scope="col">G</th>
+                                <th scope="col">N</th>
+                                <th scope="col">P</th>
+                                <th scope="col">Points</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for playerData in current_season.playerSeasonData %}
+                                <tr>
+                                    <th scope="row">{{ loop.index }}</th>
+                                    <td>{{ playerData.player.name }}</td>
+                                    <td>{{ playerData.duelPlayed }}</td>
+                                    <td>{{ playerData.duelWin }}</td>
+                                    <td>{{ playerData.duelNull }}</td>
+                                    <td>{{ playerData.duelLoose }}</td>
+                                    <td>{{ playerData.rank }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-pane fade" id="duels" role="tabpanel" aria-labelledby="duels-tab">
+                        <table class="table margin-top text-center">
+                            <thead>
+                            <tr class="bg-success text-white">
+                                <th scope="col">Domicile</th>
+                                <th scope="col">Score</th>
+                                <th scope="col">Extérieur</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="text-center">
+                                    <td><input type="text" class="form-control" placeholder="Filtrer" v-model="domFilter"></td>
+                                    <td></td>
+                                    <td><input type="text" class="form-control" placeholder="Filtrer" v-model="extFilter"></td>
+                                </tr>
+                                {% for duel in current_season.duels %}
+                                    <tr v-show="showSeasonDuelRow('{{ duel.playerSeasonDataA.player.name }}', '{{ duel.playerSeasonDataB.player.name }}')">
+                                        <td {% if not duel.scoreA is null %}class="{% if duel.scoreA > duel.scoreB %}text-success{% else %}text-danger{% endif %}"{% endif %}>{{ duel.playerSeasonDataA.player.name }}</td>
+                                        <td class="text-center">
+                                            {% if not duel.scoreA is null and not duel.scoreB is null %}
+                                                {{ duel.scoreA }} - {{ duel.scoreB }}
+                                            {% else %}
+                                                <form class="form-inline text-center" action="{{ path('season_save_duel_score', { 'id' : duel.id }) }}">
+                                                    <input name="score-a" type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="{{ duel.playerSeasonDataA.player.name }}">
+                                                    <input name="score-b" type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="{{ duel.playerSeasonDataB.player.name }}">
+
+                                                    <button type="submit" class="btn btn-warning mb-2"><i class="ion-checkmark-round"></i></button>
+                                                </form>
+                                            {% endif %}
+                                        </td>
+                                        <td {% if not duel.scoreB is null %}class="{% if duel.scoreB > duel.scoreA %}text-success{% else %}text-danger{% endif %}"{% endif %}>{{ duel.playerSeasonDataB.player.name }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <div class="row">
+            <div class="col-lg">
+                <div class="alert alert-info">
+                    Aucune saison en cours...
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    <div class="row margin-top">
+        <div class="col-lg">
+            <h2>Saisons</h2>
+        </div>
+        <div class="col-lg text-right">
+            <a href="{{ path('season_create') }}" class="btn btn-warning"><i class="ion-plus"></i> Ajouter une saison</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg">
+            <table class="table margin-top">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Mois</th>
+                    <th scope="col">Nombre de participants</th>
+                    <th scope="col">Vainqueur</th>
+                    <th scope="col">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for season in seasons %}
+                    <tr>
+                        <th scope="row">{{ season.id }}</th>
+                        <th>
+                            {% if season.status == constant('\\App\\Entity\\Season::STATUS_WAITING') %}
+                                <span class="badge badge-primary">En attente</span>
+                            {% elseif season.status == constant('\\App\\Entity\\Season::STATUS_IN_PROGRESS') %}
+                                <span class="badge badge-success">En cours</span>
+                            {% elseif season.status == constant('\\App\\Entity\\Season::STATUS_COMPLETED') %}
+                                <span class="badge badge-secondary">Terminée</span>
+                            {% endif %}
+                        </th>
+                        <td>{{ season.startAt | date("F") | trans }}</td>
+                        <td>{{ season.nbPlayers }}</td>
+                        <td>
+                            {% if season.status == constant('\\App\\Entity\\Season::STATUS_COMPLETED') %}
+                                {{ season.playerSeasonData.first.player.name }}
+                            {% else %}
+                                Pas encore de vainqueur.
+                            {% endif %}
+                        </td>
+                        <td>
+                            <a href="{{ path('season_start', { 'id': season.id }) }}" class="btn btn-success {% if not season.isCurrentMonthSeason() or not season.status == constant('\\App\\Entity\\Season::STATUS_WAITING') or season.nbPlayers < 2 %}disabled{% endif %}">{% if season.nbPlayers < 2 %}Il manque {{ season.nbMissingPlayerToStart }} joueur{% if season.nbMissingPlayerToStart > 1 %}s{% endif %} pour commencer{% else %}Commencer la saison{% endif %}</a>
+                            <a href="#" onclick="setRegisterFormSeasonId({{ season.id }})" class="btn btn-primary {% if season.status != constant('\\App\\Entity\\Season::STATUS_WAITING') %}disabled{% endif %}" data-toggle="modal" data-target="#exampleModal">S'inscrire</a>
+                            {% if season.status == constant('\\App\\Entity\\Season::STATUS_COMPLETED') %}<a href="{{ path('season_show', { 'id': season.id }) }}" class="btn btn-info">Détails</a>{% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form id="register-form" action="{{ path('season_player_register') }}">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Inscription saison</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body text-center">
+                        <select name="player" id="register-player-select" class="form-control">
+                            {% for player in players %}
+                                <option value="{{ player.id }}">{{ player.name }}</option>
+                            {% endfor %}
+                        </select>
+                        <input type="hidden" name="season" id="register-player-season-id-input">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                        <button type="submit" class="btn btn-primary">S'inscrire</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        function setRegisterFormSeasonId(id)
+        {
+            var input = document.getElementById('register-player-season-id-input');
+            input.value = id;
+        }
+    </script>
+{% endblock %}

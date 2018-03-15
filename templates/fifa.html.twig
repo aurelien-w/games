@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ label }}" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg">
+                <h1 class="text-center mt-4">FIFA</h1>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg">
+                <ul class="nav nav-pills">
+                    <li class="nav-item">
+                        <a class="nav-link {% if app.request.get('_route') == 'index' %}active{% endif %}" href="{{ path('index') }}">Classement général</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if app.request.get('_route') == 'season_index' %}active{% endif %}" href="{{ path('season_index') }}">Saisons</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-lg text-right">
+                {% block body_actions %}{% endblock %}
+            </div>
+        </div>
+
+        {% block content %}{% endblock %}
+    </div>
+
+{% endblock %}
