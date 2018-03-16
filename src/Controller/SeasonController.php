@@ -118,7 +118,7 @@ class SeasonController extends Controller {
             $em->persist($playerSeasonData);
 
             foreach ($season->getPlayerSeasonData() as $seasonDatum) {
-                for ($i = 0; $i < 4; $i++) {
+                for ($i = 0; $i < 2; $i++) {
                     $seasonDuel = new SeasonDuel();
                     $seasonDuel->setSeason($season);
 
