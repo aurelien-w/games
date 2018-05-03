@@ -224,4 +224,24 @@ class SeasonController extends Controller {
 
         return $this->redirectToRoute('season_index');
     }
+
+    /**
+     * @Route("/saisons/terminer/{id}", requirements={ "id" : "\d+" }, name="season_end")
+     *
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function endSeason($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $season = $em->getRepository('App:Season')->find($id);
+
+        $season->setStatus(Season::STATUS_COMPLETED);
+
+        $em->persist($season);
+        $em->flush();
+
+        return $this->redirectToRoute('season_index');
+    }
 }
