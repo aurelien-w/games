@@ -105,12 +105,6 @@ class Season
      */
     public function getStatus(): int
     {
-        $today = new Carbon();
-
-        if ($today->greaterThan($this->getFinishAt())) {
-            return self::STATUS_COMPLETED;
-        }
-
         return $this->status;
     }
 

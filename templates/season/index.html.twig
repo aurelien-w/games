@@ -144,9 +144,18 @@
                             {% endif %}
                         </td>
                         <td>
+                            {# Commencer la saison #}
                             <a href="{{ path('season_start', { 'id': season.id }) }}" class="btn btn-success {% if not season.isCurrentMonthSeason() or not season.status == constant('\\App\\Entity\\Season::STATUS_WAITING') or season.nbPlayers < 2 %}disabled{% endif %}">{% if season.nbPlayers < 2 %}Il manque {{ season.nbMissingPlayerToStart }} joueur{% if season.nbMissingPlayerToStart > 1 %}s{% endif %} pour commencer{% else %}Commencer la saison{% endif %}</a>
+                            {# Terminer la saison #}
+                            {% if season.status == constant('\\App\\Entity\\Season::STATUS_IN_PROGRESS') %}
+                                <a href="{{ path('season_end', { 'id': season.id }) }}" class="btn btn-danger">Terminer la saison</a>
+                            {% endif %}
+                            {# S'inscrire #}
                             <a href="#" onclick="setRegisterFormSeasonId({{ season.id }})" class="btn btn-primary {% if season.status != constant('\\App\\Entity\\Season::STATUS_WAITING') %}disabled{% endif %}" data-toggle="modal" data-target="#exampleModal">S'inscrire</a>
-                            {% if season.status == constant('\\App\\Entity\\Season::STATUS_COMPLETED') %}<a href="{{ path('season_show', { 'id': season.id }) }}" class="btn btn-info">Détails</a>{% endif %}
+                            {# Détails de la saison #}
+                            {% if season.status == constant('\\App\\Entity\\Season::STATUS_COMPLETED') %}
+                                <a href="{{ path('season_show', { 'id': season.id }) }}" class="btn btn-info">Détails</a>
+                            {% endif %}
                         </td>
                     </tr>
                 {% endfor %}
